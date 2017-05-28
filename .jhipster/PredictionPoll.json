@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "userVotes",
+            "otherEntityName": "userPollVote",
+            "otherEntityRelationshipName": "predictionPoll"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "predictionTitle",
+            "otherEntityName": "prediction",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "pollName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "pollName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pollEndDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "pollCorrect",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170528141353",
+    "entityTableName": "prediction_poll",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

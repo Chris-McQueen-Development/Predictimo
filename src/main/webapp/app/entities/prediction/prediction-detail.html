@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span>Prediction</span> {{vm.prediction.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Prediction Title</span></dt>
+        <dd>
+            <span>{{vm.prediction.predictionTitle}}</span>
+        </dd>
+        <dt><span>Prediction Description</span></dt>
+        <dd>
+            <span>{{vm.prediction.predictionDescription}}</span>
+        </dd>
+        <dt><span>Prediction Worth</span></dt>
+        <dd>
+            <span>{{vm.prediction.predictionWorth}}</span>
+        </dd>
+        <dt><span>Prediction Created Date</span></dt>
+        <dd>
+            <span>{{vm.prediction.predictionCreatedDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Poll Name</span></dt>
+        <dd>
+            <a ui-sref="prediction-poll-detail({id:vm.prediction.pollName.id})">{{vm.prediction.pollName.id}}</a>
+        </dd>
+        <dt><span>Type Name</span></dt>
+        <dd>
+            <a ui-sref="prediction-type-detail({id:vm.prediction.typeName.id})">{{vm.prediction.typeName.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="prediction-detail.edit({id:vm.prediction.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

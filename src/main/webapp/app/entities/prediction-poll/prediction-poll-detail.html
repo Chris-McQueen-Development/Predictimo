@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>Prediction Poll</span> {{vm.predictionPoll.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Poll Name</span></dt>
+        <dd>
+            <span>{{vm.predictionPoll.pollName}}</span>
+        </dd>
+        <dt><span>Poll End Date</span></dt>
+        <dd>
+            <span>{{vm.predictionPoll.pollEndDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Poll Correct</span></dt>
+        <dd>
+            <span>{{vm.predictionPoll.pollCorrect}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="prediction-poll-detail.edit({id:vm.predictionPoll.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

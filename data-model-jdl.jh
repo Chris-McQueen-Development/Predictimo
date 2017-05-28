@@ -1,0 +1,49 @@
+entity Prediction {
+	predictionTitle String required,
+  	predictionDescription String,
+    predictionWorth Integer required,
+    predictionCreatedDate LocalDate required
+}
+
+entity PredictionType {
+	typeName String required,
+    typeDescription String,
+    typeExpirationDate LocalDate
+}
+
+entity PredictionPoll {
+	pollName String required,
+    pollEndDate LocalDate,
+    pollCorrect Boolean
+}
+
+entity UserPollVote {
+	isCorrectVote Boolean required
+}
+
+entity UserProfile {
+	alias String required
+}
+
+relationship OneToOne {
+	Prediction{pollName} to PredictionPoll{predictionTitle}
+}
+
+relationship OneToOne {
+    UserProfile{user} to User
+}
+
+relationship OneToMany {
+	PredictionType{predictionTitle} to Prediction{typeName},
+    UserProfile{userVotes} to UserPollVote{userProfile},
+    PredictionPoll{userVotes} to UserPollVote{predictionPoll}
+}
+
+relationship ManyToMany {
+	UserProfile{prediction(prediction)} to Prediction{userProfileCreator}
+}
+
+relationship ManyToOne {
+	UserProfile{predictionTitle} to Prediction{usersPredicting}
+}
+

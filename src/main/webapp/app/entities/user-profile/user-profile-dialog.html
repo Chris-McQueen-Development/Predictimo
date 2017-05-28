@@ -1,0 +1,54 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUserProfileLabel">Create or edit a User Profile</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.userProfile.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.userProfile.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_alias">Alias</label>
+            <input type="text" class="form-control" name="alias" id="field_alias"
+                    ng-model="vm.userProfile.alias"
+                    required/>
+            <div ng-show="editForm.alias.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.alias.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.userProfile.user" ng-options="user as user.id for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_predictionTitle">Prediction Title</label>
+            <select class="form-control" id="field_predictionTitle" name="predictionTitle" ng-model="vm.userProfile.predictionTitle" ng-options="prediction as prediction.id for prediction in vm.predictions track by prediction.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_prediction">Prediction</label>
+            <select class="form-control" id="field_prediction" multiple name="prediction" ng-model="vm.userProfile.predictions" ng-options="prediction as prediction.prediction for prediction in vm.predictions track by prediction.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

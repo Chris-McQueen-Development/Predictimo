@@ -1,0 +1,60 @@
+<div>
+    <h2>Prediction Types</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="prediction-type.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Prediction Type
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Type Name</span></th>
+                    <th><span>Type Description</span></th>
+                    <th><span>Type Expiration Date</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="predictionType in vm.predictionTypes track by predictionType.id">
+                    <td><a ui-sref="prediction-type-detail({id:predictionType.id})">{{predictionType.id}}</a></td>
+                    <td>{{predictionType.typeName}}</td>
+                    <td>{{predictionType.typeDescription}}</td>
+                        <td>{{predictionType.typeExpirationDate | date:'mediumDate'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="prediction-type-detail({id:predictionType.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="prediction-type.edit({id:predictionType.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="prediction-type.delete({id:predictionType.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

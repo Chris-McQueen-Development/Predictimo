@@ -1,0 +1,64 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "pollName",
+            "otherEntityName": "predictionPoll",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "predictionTitle"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "typeName",
+            "otherEntityName": "predictionType",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "usersPredicting",
+            "otherEntityName": "userProfile",
+            "otherEntityRelationshipName": "predictionTitle"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "userProfileCreator",
+            "otherEntityName": "userProfile",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "prediction"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "predictionTitle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "predictionDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "predictionWorth",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "predictionCreatedDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170528141351",
+    "entityTableName": "prediction",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

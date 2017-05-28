@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>User Poll Vote</span> {{vm.userPollVote.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Is Correct Vote</span></dt>
+        <dd>
+            <span>{{vm.userPollVote.isCorrectVote}}</span>
+        </dd>
+        <dt><span>User Profile</span></dt>
+        <dd>
+            <a ui-sref="user-profile-detail({id:vm.userPollVote.userProfile.id})">{{vm.userPollVote.userProfile.id}}</a>
+        </dd>
+        <dt><span>Prediction Poll</span></dt>
+        <dd>
+            <a ui-sref="prediction-poll-detail({id:vm.userPollVote.predictionPoll.id})">{{vm.userPollVote.predictionPoll.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="user-poll-vote-detail.edit({id:vm.userPollVote.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

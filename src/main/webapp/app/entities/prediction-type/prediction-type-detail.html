@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>Prediction Type</span> {{vm.predictionType.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Type Name</span></dt>
+        <dd>
+            <span>{{vm.predictionType.typeName}}</span>
+        </dd>
+        <dt><span>Type Description</span></dt>
+        <dd>
+            <span>{{vm.predictionType.typeDescription}}</span>
+        </dd>
+        <dt><span>Type Expiration Date</span></dt>
+        <dd>
+            <span>{{vm.predictionType.typeExpirationDate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="prediction-type-detail.edit({id:vm.predictionType.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

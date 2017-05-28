@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "predictionTitle",
+            "otherEntityName": "prediction",
+            "otherEntityRelationshipName": "typeName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "typeName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "typeDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "typeExpirationDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20170528141352",
+    "entityTableName": "prediction_type",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}
