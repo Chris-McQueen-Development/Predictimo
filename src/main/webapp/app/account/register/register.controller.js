@@ -18,6 +18,10 @@
         vm.register = register;
         vm.registerAccount = {};
         vm.success = null;
+        
+        vm.backgroundStyle = {
+            'background-image': 'url(content/images/xboxvsplaystation.jpg)'
+        }
 
         $timeout(function (){angular.element('#login').focus();});
 
@@ -31,8 +35,11 @@
                 vm.errorUserExists = null;
                 vm.errorEmailExists = null;
 
-                Auth.createAccount(vm.registerAccount).then(function () {
+                Auth.createAccount(vm.registerAccount).then(function (account) {
+                    console.log(account);
                     vm.success = 'OK';
+                    
+                   /* Auth.userProfile()*/
                 }).catch(function (response) {
                     vm.success = null;
                     if (response.status === 400 && response.data === 'login already in use') {

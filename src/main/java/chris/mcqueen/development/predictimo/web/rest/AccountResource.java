@@ -1,16 +1,11 @@
 package chris.mcqueen.development.predictimo.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Optional;
 
-import chris.mcqueen.development.predictimo.domain.User;
-import chris.mcqueen.development.predictimo.repository.UserRepository;
-import chris.mcqueen.development.predictimo.security.SecurityUtils;
-import chris.mcqueen.development.predictimo.service.MailService;
-import chris.mcqueen.development.predictimo.service.UserService;
-import chris.mcqueen.development.predictimo.service.dto.UserDTO;
-import chris.mcqueen.development.predictimo.web.rest.vm.KeyAndPasswordVM;
-import chris.mcqueen.development.predictimo.web.rest.vm.ManagedUserVM;
-import chris.mcqueen.development.predictimo.web.rest.util.HeaderUtil;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -19,11 +14,26 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.*;
+import com.codahale.metrics.annotation.Timed;
+
+import chris.mcqueen.development.predictimo.domain.User;
+import chris.mcqueen.development.predictimo.domain.UserProfile;
+import chris.mcqueen.development.predictimo.repository.UserProfileRepository;
+import chris.mcqueen.development.predictimo.repository.UserRepository;
+import chris.mcqueen.development.predictimo.security.SecurityUtils;
+import chris.mcqueen.development.predictimo.service.MailService;
+import chris.mcqueen.development.predictimo.service.UserService;
+import chris.mcqueen.development.predictimo.service.dto.UserDTO;
+import chris.mcqueen.development.predictimo.web.rest.util.HeaderUtil;
+import chris.mcqueen.development.predictimo.web.rest.vm.KeyAndPasswordVM;
+import chris.mcqueen.development.predictimo.web.rest.vm.ManagedUserVM;
 
 /**
  * REST controller for managing the current user's account.
@@ -39,13 +49,16 @@ public class AccountResource {
     private final UserService userService;
 
     private final MailService mailService;
+    
+    private final UserProfileRepository userProfileRepository;
 
     public AccountResource(UserRepository userRepository, UserService userService,
-            MailService mailService) {
+            MailService mailService, UserProfileRepository userProfileRepository) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.userProfileRepository = userProfileRepository;
     }
 
     /**
@@ -72,6 +85,12 @@ public class AccountResource {
                             managedUserVM.getFirstName(), managedUserVM.getLastName(),
                             managedUserVM.getEmail().toLowerCase(), managedUserVM.getImageUrl(),
                             managedUserVM.getLangKey());
+                    
+                    UserProfile userProfile = new UserProfile();
+                    userProfile.setAlias(user.getLogin());
+                    userProfile.setUser(user);
+                    
+                    userProfileRepository.save(userProfile);
 
                     mailService.sendActivationEmail(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);
@@ -200,5 +219,25 @@ public class AccountResource {
         return !StringUtils.isEmpty(password) &&
             password.length() >= ManagedUserVM.PASSWORD_MIN_LENGTH &&
             password.length() <= ManagedUserVM.PASSWORD_MAX_LENGTH;
+    }
+    
+    /**
+     * POST  /user-profiles : Create a new userProfile.
+     *
+     * @param userProfile the userProfile to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new userProfile, or with status 400 (Bad Request) if the userProfile has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/user-profile-creation")
+    @Timed
+    public ResponseEntity<UserProfile> createUserProfile(@Valid @RequestBody UserProfile userProfile) throws URISyntaxException {
+        log.debug("REST request to save UserProfile : {}", userProfile);
+        if (userProfile.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("userProfle", "idexists", "A new userProfile cannot already have an ID")).body(null);
+        }
+        UserProfile result = userProfileRepository.save(userProfile);
+        return ResponseEntity.created(new URI("/api/user-profiles/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("userProfile", result.getId().toString()))
+            .body(result);
     }
 }

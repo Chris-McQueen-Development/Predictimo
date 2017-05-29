@@ -15,6 +15,10 @@
         vm.requestReset = requestReset;
         vm.resetAccount = {};
         vm.success = null;
+        
+         vm.backgroundStyle = {
+            'background-image': 'url(content/images/xboxvsplaystation.jpg)'
+        }
 
         $timeout(function (){angular.element('#email').focus();});
 

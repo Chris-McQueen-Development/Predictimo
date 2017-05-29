@@ -21,7 +21,8 @@
                     controller: 'ActivationController',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            hideNavbar: true
         });
     }
 })();

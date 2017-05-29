@@ -3,11 +3,11 @@
 
     angular
         .module('predictimoApp')
-        .controller('LoginModalController', LoginModalController);
+        .controller('LoginController', LoginController);
 
-    LoginModalController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth'];
 
-    function LoginModalController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, Auth) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -19,6 +19,10 @@
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
         vm.username = null;
+        
+        vm.backgroundStyle = {
+            'background-image': 'url(content/images/xboxvsplaystation.jpg)'
+        }
 
         $timeout(function (){angular.element('#username').focus();});
 
@@ -29,20 +33,18 @@
                 rememberMe: true
             };
             vm.authenticationError = false;
-            $uibModalInstance.dismiss('cancel');
         }
 
         function login (event) {
             event.preventDefault();
             Auth.login({
                 username: vm.username,
-                password: vm.password,
-                rememberMe: vm.rememberMe
+                password: vm.password
             }).then(function () {
                 vm.authenticationError = false;
-                $uibModalInstance.close();
+                console.log($state.current)
                 if ($state.current.name === 'register' || $state.current.name === 'activate' ||
-                    $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
+                    $state.current.name === 'finishReset' || $state.current.name === 'requestReset' || $state.current.name === 'login') {
                     $state.go('home');
                 }
 
@@ -61,12 +63,10 @@
         }
 
         function register () {
-            $uibModalInstance.dismiss('cancel');
             $state.go('register');
         }
 
         function requestResetPassword () {
-            $uibModalInstance.dismiss('cancel');
             $state.go('requestReset');
         }
     }

@@ -20,7 +20,8 @@
                     controller: 'RequestResetController',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            hideNavbar: true
         });
     }
 })();
