@@ -1,16 +1,21 @@
 package chris.mcqueen.development.predictimo.web.rest;
 
-import chris.mcqueen.development.predictimo.PredictimoApp;
-import chris.mcqueen.development.predictimo.domain.Authority;
-import chris.mcqueen.development.predictimo.domain.User;
-import chris.mcqueen.development.predictimo.repository.AuthorityRepository;
-import chris.mcqueen.development.predictimo.repository.UserRepository;
-import chris.mcqueen.development.predictimo.security.AuthoritiesConstants;
-import chris.mcqueen.development.predictimo.service.MailService;
-import chris.mcqueen.development.predictimo.service.UserService;
-import chris.mcqueen.development.predictimo.service.dto.UserDTO;
-import chris.mcqueen.development.predictimo.web.rest.vm.KeyAndPasswordVM;
-import chris.mcqueen.development.predictimo.web.rest.vm.ManagedUserVM;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.Instant;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,19 +33,18 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import chris.mcqueen.development.predictimo.PredictimoApp;
+import chris.mcqueen.development.predictimo.domain.Authority;
+import chris.mcqueen.development.predictimo.domain.User;
+import chris.mcqueen.development.predictimo.repository.AuthorityRepository;
+import chris.mcqueen.development.predictimo.repository.UserProfileRepository;
+import chris.mcqueen.development.predictimo.repository.UserRepository;
+import chris.mcqueen.development.predictimo.security.AuthoritiesConstants;
+import chris.mcqueen.development.predictimo.service.MailService;
+import chris.mcqueen.development.predictimo.service.UserService;
+import chris.mcqueen.development.predictimo.service.dto.UserDTO;
+import chris.mcqueen.development.predictimo.web.rest.vm.KeyAndPasswordVM;
+import chris.mcqueen.development.predictimo.web.rest.vm.ManagedUserVM;
 
 /**
  * Test class for the AccountResource REST controller.
@@ -56,6 +60,9 @@ public class AccountResourceIntTest {
 
     @Autowired
     private AuthorityRepository authorityRepository;
+    
+    @Autowired
+    private UserProfileRepository userProfileRepository;
 
     @Autowired
     private UserService userService;
@@ -82,10 +89,10 @@ public class AccountResourceIntTest {
         doNothing().when(mockMailService).sendActivationEmail(anyObject());
 
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userService, mockMailService, userProfileRepository);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, mockUserService, mockMailService, userProfileRepository);
 
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)

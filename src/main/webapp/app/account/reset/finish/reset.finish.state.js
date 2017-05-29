@@ -20,7 +20,8 @@
                     controller: 'ResetFinishController',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            hideNavbar: true
         });
     }
 })();

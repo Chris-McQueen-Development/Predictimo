@@ -18,6 +18,10 @@
         vm.login = LoginService.open;
         vm.resetAccount = {};
         vm.success = null;
+        
+         vm.backgroundStyle = {
+            'background-image': 'url(content/images/xboxvsplaystation.jpg)'
+        }
 
         $timeout(function (){angular.element('#password').focus();});
 

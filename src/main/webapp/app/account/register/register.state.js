@@ -21,7 +21,8 @@
                     controller: 'RegisterController',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            hideNavbar: true
         });
     }
 })();

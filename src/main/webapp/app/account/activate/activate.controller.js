@@ -9,6 +9,10 @@
 
     function ActivationController ($stateParams, Auth, LoginService) {
         var vm = this;
+        
+        vm.backgroundStyle = {
+            'background-image': 'url(content/images/xboxvsplaystation.jpg)'
+        }
 
         Auth.activateAccount({key: $stateParams.key}).then(function () {
             vm.error = null;

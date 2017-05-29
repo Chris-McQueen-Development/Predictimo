@@ -5,9 +5,9 @@
         .module('predictimoApp')
         .factory('Auth', Auth);
 
-    Auth.$inject = ['$rootScope', '$state', '$sessionStorage', '$q', 'Principal', 'AuthServerProvider', 'Account', 'LoginService', 'Register', 'Activate', 'Password', 'PasswordResetInit', 'PasswordResetFinish'];
+    Auth.$inject = ['$rootScope', '$state', '$sessionStorage', '$q', 'Principal', 'AuthServerProvider', 'Account', 'LoginService', 'Register', 'Activate', 'Password', 'PasswordResetInit', 'PasswordResetFinish', '$http'];
 
-    function Auth ($rootScope, $state, $sessionStorage, $q, Principal, AuthServerProvider, Account, LoginService, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
+    function Auth ($rootScope, $state, $sessionStorage, $q, Principal, AuthServerProvider, Account, LoginService, Register, Activate, Password, PasswordResetInit, PasswordResetFinish, $http) {
         var service = {
             activateAccount: activateAccount,
             authorize: authorize,
@@ -92,6 +92,20 @@
 
             return Register.save(account,
                 function () {
+                    var userProfile = {};
+                    userProfile.alias = account.login;
+                    userProfile.user = account;
+                    
+                    $http({
+                        method: 'POST', 
+                        url: 'api/user-profile-creation',
+                        data: userProfile
+                          }).then(function successCallback(response) {
+                        console.log(response);
+                    }, function errorCallback(response) {
+                        console.log(response);
+                    });
+                
                     return cb(account);
                 },
                 function (err) {
@@ -99,6 +113,7 @@
                     return cb(err);
                 }.bind(this)).$promise;
         }
+        
 
         function login (credentials, callback) {
             var cb = callback || angular.noop;
