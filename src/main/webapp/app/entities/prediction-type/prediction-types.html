@@ -18,7 +18,7 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr>
-                    <th><span>ID</span></th>
+                    <!--<th><span>ID</span></th>-->
                     <th><span>Type Name</span></th>
                     <th><span>Type Description</span></th>
                     <th><span>Type Expiration Date</span></th>
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="predictionType in vm.predictionTypes track by predictionType.id">
-                    <td><a ui-sref="prediction-type-detail({id:predictionType.id})">{{predictionType.id}}</a></td>
+                    <!--<td><a ui-sref="prediction-type-detail({id:predictionType.id})">{{predictionType.id}}</a></td>-->
                     <td>{{predictionType.typeName}}</td>
                     <td>{{predictionType.typeDescription}}</td>
                         <td>{{predictionType.typeExpirationDate | date:'mediumDate'}}</td>

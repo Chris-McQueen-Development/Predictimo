@@ -11,6 +11,8 @@
         var vm = this;
 
         vm.prediction = entity;
+        // TODO: Manage default prediction worth from REST end-point //
+        vm.prediction.predictionWorth = 1;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -55,6 +57,7 @@
         }
 
         vm.datePickerOpenStatus.predictionCreatedDate = false;
+        vm.prediction.predictionCreatedDate = new Date();
 
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;

@@ -31,11 +31,11 @@
                     ng-model="vm.prediction.predictionDescription"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group" >
             <label class="control-label" for="field_predictionWorth">Prediction Worth</label>
             <input type="number" class="form-control" name="predictionWorth" id="field_predictionWorth"
                     ng-model="vm.prediction.predictionWorth"
-                    required/>
+                    required ng-disabled="true"/>
             <div ng-show="editForm.predictionWorth.$invalid">
                 <p class="help-block"
                     ng-show="editForm.predictionWorth.$error.required">
@@ -51,7 +51,7 @@
             <label class="control-label" for="field_predictionCreatedDate">Prediction Created Date</label>
                 <div class="input-group">
                     <input id="field_predictionCreatedDate" type="text" class="form-control" name="predictionCreatedDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.prediction.predictionCreatedDate" is-open="vm.datePickerOpenStatus.predictionCreatedDate"
-                    required/>
+                    required ng-disabled="true"/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('predictionCreatedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -72,7 +72,7 @@
         </div>
         <div class="form-group">
             <label for="field_typeName">Type Name</label>
-            <select class="form-control" id="field_typeName" name="typeName" ng-model="vm.prediction.typeName" ng-options="predictionType as predictionType.id for predictionType in vm.predictiontypes track by predictionType.id">
+            <select class="form-control" id="field_typeName" name="typeName" ng-model="vm.prediction.typeName" ng-options="predictionType as predictionType.typeName for predictionType in vm.predictiontypes track by predictionType.id">
                 <option value=""></option>
             </select>
         </div>
