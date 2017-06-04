@@ -2,6 +2,9 @@ body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    background: url('https://www.destructoid.com//ul/437226-godofwar.jpg') no-repeat center center fixed; 
+    background-size: cover;
+
 }
 
 
