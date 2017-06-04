@@ -21,8 +21,6 @@
                     <th><span>ID</span></th>
                     <th><span>Alias</span></th>
                     <th><span>User</span></th>
-                    <th><span>Prediction Title</span></th>
-                    <th><span>Prediction</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,14 +30,6 @@
                     <td>{{userProfile.alias}}</td>
                     <td>
                         {{userProfile.user.id}}
-                    </td>
-                    <td>
-                        <a ui-sref="prediction-detail({id:userProfile.predictionTitle.id})">{{userProfile.predictionTitle.id}}</a>
-                    </td>
-                    <td>
-                        <span ng-repeat="prediction in userProfile.predictions">
-                            <a class="form-control-static" ui-sref="prediction-detail({id: prediction.id})">{{prediction.prediction}}</a>{{$last ? '' : ', '}}
-                        </span>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

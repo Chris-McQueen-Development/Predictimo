@@ -14,20 +14,6 @@
             "relationshipName": "userVotes",
             "otherEntityName": "userPollVote",
             "otherEntityRelationshipName": "userProfile"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "predictionTitle",
-            "otherEntityName": "prediction",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "userProfileCreator",
-            "relationshipName": "prediction",
-            "otherEntityName": "prediction",
-            "otherEntityField": "prediction",
-            "ownerSide": true
         }
     ],
     "fields": [
@@ -40,8 +26,8 @@
         }
     ],
     "changelogDate": "20170528141355",
-    "entityTableName": "user_profile",
     "dto": "no",
-    "pagination": "no",
-    "service": "no"
+    "service": "no",
+    "entityTableName": "user_profile",
+    "pagination": "no"
 }

@@ -14,19 +14,6 @@
             "relationshipName": "typeName",
             "otherEntityName": "predictionType",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "usersPredicting",
-            "otherEntityName": "userProfile",
-            "otherEntityRelationshipName": "predictionTitle"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "userProfileCreator",
-            "otherEntityName": "userProfile",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "prediction"
         }
     ],
     "fields": [
@@ -57,8 +44,8 @@
         }
     ],
     "changelogDate": "20170528141351",
-    "entityTableName": "prediction",
     "dto": "no",
-    "pagination": "no",
-    "service": "no"
+    "service": "no",
+    "entityTableName": "prediction",
+    "pagination": "no"
 }

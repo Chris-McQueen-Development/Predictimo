@@ -1,6 +1,5 @@
 package chris.mcqueen.development.predictimo.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,8 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -48,16 +45,6 @@ public class Prediction implements Serializable {
 
     @ManyToOne
     private PredictionType typeName;
-
-    @OneToMany(mappedBy = "predictionTitle")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<UserProfile> usersPredictings = new HashSet<>();
-
-    @ManyToMany(mappedBy = "predictions")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<UserProfile> userProfileCreators = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -143,56 +130,6 @@ public class Prediction implements Serializable {
 
     public void setTypeName(PredictionType predictionType) {
         this.typeName = predictionType;
-    }
-
-    public Set<UserProfile> getUsersPredictings() {
-        return usersPredictings;
-    }
-
-    public Prediction usersPredictings(Set<UserProfile> userProfiles) {
-        this.usersPredictings = userProfiles;
-        return this;
-    }
-
-    public Prediction addUsersPredicting(UserProfile userProfile) {
-        this.usersPredictings.add(userProfile);
-        userProfile.setPredictionTitle(this);
-        return this;
-    }
-
-    public Prediction removeUsersPredicting(UserProfile userProfile) {
-        this.usersPredictings.remove(userProfile);
-        userProfile.setPredictionTitle(null);
-        return this;
-    }
-
-    public void setUsersPredictings(Set<UserProfile> userProfiles) {
-        this.usersPredictings = userProfiles;
-    }
-
-    public Set<UserProfile> getUserProfileCreators() {
-        return userProfileCreators;
-    }
-
-    public Prediction userProfileCreators(Set<UserProfile> userProfiles) {
-        this.userProfileCreators = userProfiles;
-        return this;
-    }
-
-    public Prediction addUserProfileCreator(UserProfile userProfile) {
-        this.userProfileCreators.add(userProfile);
-        userProfile.getPredictions().add(this);
-        return this;
-    }
-
-    public Prediction removeUserProfileCreator(UserProfile userProfile) {
-        this.userProfileCreators.remove(userProfile);
-        userProfile.getPredictions().remove(this);
-        return this;
-    }
-
-    public void setUserProfileCreators(Set<UserProfile> userProfiles) {
-        this.userProfileCreators = userProfiles;
     }
 
     @Override

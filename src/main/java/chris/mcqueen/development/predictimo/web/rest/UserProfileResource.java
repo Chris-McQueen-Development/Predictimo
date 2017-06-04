@@ -86,7 +86,7 @@ public class UserProfileResource {
     @Timed
     public List<UserProfile> getAllUserProfiles() {
         log.debug("REST request to get all UserProfiles");
-        List<UserProfile> userProfiles = userProfileRepository.findAllWithEagerRelationships();
+        List<UserProfile> userProfiles = userProfileRepository.findAll();
         return userProfiles;
     }
 
@@ -100,7 +100,7 @@ public class UserProfileResource {
     @Timed
     public ResponseEntity<UserProfile> getUserProfile(@PathVariable Long id) {
         log.debug("REST request to get UserProfile : {}", id);
-        UserProfile userProfile = userProfileRepository.findOneWithEagerRelationships(id);
+        UserProfile userProfile = userProfileRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userProfile));
     }
 
