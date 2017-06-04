@@ -10,9 +10,11 @@
     <include file="classpath:config/liquibase/changelog/20170528141353_added_entity_PredictionPoll.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170528141354_added_entity_UserPollVote.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170528141355_added_entity_UserProfile.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170604155404_added_entity_PredictionResponse.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20170528141351_added_entity_constraints_Prediction.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170528141354_added_entity_constraints_UserPollVote.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170528141355_added_entity_constraints_UserProfile.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170604155404_added_entity_constraints_PredictionResponse.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

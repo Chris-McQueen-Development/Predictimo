@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "userProfile",
+            "otherEntityName": "userProfile",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "alias"
+        },
+        {
+            "relationshipName": "prediction",
+            "otherEntityName": "prediction",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "predictionTitle"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "accepted",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "responseDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20170604155404",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "prediction_response",
+    "pagination": "no"
+}

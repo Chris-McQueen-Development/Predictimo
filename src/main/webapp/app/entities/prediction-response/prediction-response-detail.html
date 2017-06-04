@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Prediction Response</span> {{vm.predictionResponse.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Accepted</span></dt>
+        <dd>
+            <span>{{vm.predictionResponse.accepted}}</span>
+        </dd>
+        <dt><span>Response Date</span></dt>
+        <dd>
+            <span>{{vm.predictionResponse.responseDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>User Profile</span></dt>
+        <dd>
+            <a ui-sref="user-profile-detail({id:vm.predictionResponse.userProfile.id})">{{vm.predictionResponse.userProfile.alias}}</a>
+        </dd>
+        <dt><span>Prediction</span></dt>
+        <dd>
+            <a ui-sref="prediction-detail({id:vm.predictionResponse.prediction.id})">{{vm.predictionResponse.prediction.predictionTitle}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="prediction-response-detail.edit({id:vm.predictionResponse.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>
