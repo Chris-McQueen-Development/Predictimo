@@ -27,23 +27,8 @@
             <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
-            <column name="prediction_title_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
-        <createTable tableName="user_profile_prediction">
-            <column name="predictions_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="user_profiles_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="user_profiles_id, predictions_id" tableName="user_profile_prediction"/>
         
     </changeSet>
 </databaseChangeLog>

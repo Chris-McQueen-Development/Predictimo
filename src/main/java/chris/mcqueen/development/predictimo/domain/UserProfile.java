@@ -39,15 +39,10 @@ public class UserProfile implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<UserPollVote> userVotes = new HashSet<>();
 
-    @ManyToOne
-    private Prediction predictionTitle;
-
-    @ManyToMany
+    @OneToMany(mappedBy = "creator")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "user_profile_prediction",
-               joinColumns = @JoinColumn(name="user_profiles_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="predictions_id", referencedColumnName="id"))
-    private Set<Prediction> predictions = new HashSet<>();
+    private Set<Prediction> predictionsCreateds = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -108,42 +103,29 @@ public class UserProfile implements Serializable {
         this.userVotes = userPollVotes;
     }
 
-    public Prediction getPredictionTitle() {
-        return predictionTitle;
+    public Set<Prediction> getPredictionsCreateds() {
+        return predictionsCreateds;
     }
 
-    public UserProfile predictionTitle(Prediction prediction) {
-        this.predictionTitle = prediction;
+    public UserProfile predictionsCreateds(Set<Prediction> predictions) {
+        this.predictionsCreateds = predictions;
         return this;
     }
 
-    public void setPredictionTitle(Prediction prediction) {
-        this.predictionTitle = prediction;
-    }
-
-    public Set<Prediction> getPredictions() {
-        return predictions;
-    }
-
-    public UserProfile predictions(Set<Prediction> predictions) {
-        this.predictions = predictions;
+    public UserProfile addPredictionsCreated(Prediction prediction) {
+        this.predictionsCreateds.add(prediction);
+        prediction.setCreator(this);
         return this;
     }
 
-    public UserProfile addPrediction(Prediction prediction) {
-        this.predictions.add(prediction);
-        prediction.getUserProfileCreators().add(this);
+    public UserProfile removePredictionsCreated(Prediction prediction) {
+        this.predictionsCreateds.remove(prediction);
+        prediction.setCreator(null);
         return this;
     }
 
-    public UserProfile removePrediction(Prediction prediction) {
-        this.predictions.remove(prediction);
-        prediction.getUserProfileCreators().remove(this);
-        return this;
-    }
-
-    public void setPredictions(Set<Prediction> predictions) {
-        this.predictions = predictions;
+    public void setPredictionsCreateds(Set<Prediction> predictions) {
+        this.predictionsCreateds = predictions;
     }
 
     @Override

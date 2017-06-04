@@ -12,16 +12,6 @@
         <dd>
             {{vm.userProfile.user.id}}
         </dd>
-        <dt><span>Prediction Title</span></dt>
-        <dd>
-            <a ui-sref="prediction-detail({id:vm.userProfile.predictionTitle.id})">{{vm.userProfile.predictionTitle.id}}</a>
-        </dd>
-        <dt><span>Prediction</span></dt>
-        <dd>
-            <span ng-repeat="prediction in vm.userProfile.predictions">
-                <a ui-sref="prediction-detail({id: prediction.id})">{{prediction.prediction}}</a>{{$last ? '' : ', '}}
-            </span>
-        </dd>
     </dl>
 
     <button type="submit"
