@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="prediction_type"/>
 
+        <addForeignKeyConstraint baseColumnNames="creator_id"
+                                 baseTableName="prediction"
+                                 constraintName="fk_prediction_creator_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_profile"/>
+
     </changeSet>
 </databaseChangeLog>

@@ -39,6 +39,11 @@ public class UserProfile implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<UserPollVote> userVotes = new HashSet<>();
 
+    @OneToMany(mappedBy = "creator")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Prediction> predictionsCreateds = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -96,6 +101,31 @@ public class UserProfile implements Serializable {
 
     public void setUserVotes(Set<UserPollVote> userPollVotes) {
         this.userVotes = userPollVotes;
+    }
+
+    public Set<Prediction> getPredictionsCreateds() {
+        return predictionsCreateds;
+    }
+
+    public UserProfile predictionsCreateds(Set<Prediction> predictions) {
+        this.predictionsCreateds = predictions;
+        return this;
+    }
+
+    public UserProfile addPredictionsCreated(Prediction prediction) {
+        this.predictionsCreateds.add(prediction);
+        prediction.setCreator(this);
+        return this;
+    }
+
+    public UserProfile removePredictionsCreated(Prediction prediction) {
+        this.predictionsCreateds.remove(prediction);
+        prediction.setCreator(null);
+        return this;
+    }
+
+    public void setPredictionsCreateds(Set<Prediction> predictions) {
+        this.predictionsCreateds = predictions;
     }
 
     @Override

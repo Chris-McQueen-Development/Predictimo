@@ -28,6 +28,10 @@
         <dd>
             <a ui-sref="prediction-type-detail({id:vm.prediction.typeName.id})">{{vm.prediction.typeName.id}}</a>
         </dd>
+        <dt><span>Creator</span></dt>
+        <dd>
+            <a ui-sref="user-profile-detail({id:vm.prediction.creator.id})">{{vm.prediction.creator.alias}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

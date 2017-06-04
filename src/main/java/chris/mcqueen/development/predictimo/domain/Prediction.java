@@ -46,6 +46,9 @@ public class Prediction implements Serializable {
     @ManyToOne
     private PredictionType typeName;
 
+    @ManyToOne
+    private UserProfile creator;
+
     public Long getId() {
         return id;
     }
@@ -130,6 +133,19 @@ public class Prediction implements Serializable {
 
     public void setTypeName(PredictionType predictionType) {
         this.typeName = predictionType;
+    }
+
+    public UserProfile getCreator() {
+        return creator;
+    }
+
+    public Prediction creator(UserProfile userProfile) {
+        this.creator = userProfile;
+        return this;
+    }
+
+    public void setCreator(UserProfile userProfile) {
+        this.creator = userProfile;
     }
 
     @Override

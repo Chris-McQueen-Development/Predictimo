@@ -52,6 +52,7 @@ public class CacheConfiguration {
             cm.createCache(chris.mcqueen.development.predictimo.domain.UserProfile.class.getName(), jcacheConfiguration);
             cm.createCache(chris.mcqueen.development.predictimo.domain.UserProfile.class.getName() + ".userVotes", jcacheConfiguration);
             cm.createCache(chris.mcqueen.development.predictimo.domain.UserProfile.class.getName() + ".predictions", jcacheConfiguration);
+            cm.createCache(chris.mcqueen.development.predictimo.domain.UserProfile.class.getName() + ".predictionsCreateds", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

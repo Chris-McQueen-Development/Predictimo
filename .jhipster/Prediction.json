@@ -14,6 +14,12 @@
             "relationshipName": "typeName",
             "otherEntityName": "predictionType",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "creator",
+            "otherEntityName": "userProfile",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "alias"
         }
     ],
     "fields": [
