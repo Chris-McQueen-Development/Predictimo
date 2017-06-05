@@ -13,6 +13,7 @@
         vm.prediction = entity;
         // TODO: Manage default prediction worth from REST end-point //
         vm.prediction.predictionWorth = 1;
+        
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -28,6 +29,11 @@
         });
         vm.predictiontypes = PredictionType.query();
         vm.userprofiles = UserProfile.query();
+        $q.all([vm.userprofiles.$promise]).then(function() {
+            vm.prediction.creator = vm.userprofiles[0];
+            console.log(vm.prediction.creator);
+        })
+        
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
