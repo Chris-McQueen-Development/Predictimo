@@ -39,11 +39,21 @@ public class Prediction implements Serializable {
     @Column(name = "prediction_created_date", nullable = false)
     private LocalDate predictionCreatedDate;
 
+    @Column(name = "prediction_finished")
+    private Boolean predictionFinished;
+
+    @Column(name = "voting_open")
+    private Boolean votingOpen;
+
     @ManyToOne
     private PredictionType typeName;
 
     @ManyToOne
     private UserProfile creator;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private UserPollVote userPollVote;
 
     public Long getId() {
         return id;
@@ -105,6 +115,32 @@ public class Prediction implements Serializable {
         this.predictionCreatedDate = predictionCreatedDate;
     }
 
+    public Boolean isPredictionFinished() {
+        return predictionFinished;
+    }
+
+    public Prediction predictionFinished(Boolean predictionFinished) {
+        this.predictionFinished = predictionFinished;
+        return this;
+    }
+
+    public void setPredictionFinished(Boolean predictionFinished) {
+        this.predictionFinished = predictionFinished;
+    }
+
+    public Boolean isVotingOpen() {
+        return votingOpen;
+    }
+
+    public Prediction votingOpen(Boolean votingOpen) {
+        this.votingOpen = votingOpen;
+        return this;
+    }
+
+    public void setVotingOpen(Boolean votingOpen) {
+        this.votingOpen = votingOpen;
+    }
+
     public PredictionType getTypeName() {
         return typeName;
     }
@@ -129,6 +165,19 @@ public class Prediction implements Serializable {
 
     public void setCreator(UserProfile userProfile) {
         this.creator = userProfile;
+    }
+
+    public UserPollVote getUserPollVote() {
+        return userPollVote;
+    }
+
+    public Prediction userPollVote(UserPollVote userPollVote) {
+        this.userPollVote = userPollVote;
+        return this;
+    }
+
+    public void setUserPollVote(UserPollVote userPollVote) {
+        this.userPollVote = userPollVote;
     }
 
     @Override
@@ -159,6 +208,8 @@ public class Prediction implements Serializable {
             ", predictionDescription='" + getPredictionDescription() + "'" +
             ", predictionWorth='" + getPredictionWorth() + "'" +
             ", predictionCreatedDate='" + getPredictionCreatedDate() + "'" +
+            ", predictionFinished='" + isPredictionFinished() + "'" +
+            ", votingOpen='" + isVotingOpen() + "'" +
             "}";
     }
 }

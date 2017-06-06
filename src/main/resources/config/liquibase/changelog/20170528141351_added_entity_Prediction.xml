@@ -37,6 +37,14 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="prediction_finished" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="voting_open" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
             <column name="type_name_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -44,7 +52,9 @@
             <column name="creator_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-
+            <column name="user_poll_vote_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

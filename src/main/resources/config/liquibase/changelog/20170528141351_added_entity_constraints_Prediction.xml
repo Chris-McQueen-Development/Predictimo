@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="user_profile"/>
 
+        <addForeignKeyConstraint baseColumnNames="user_poll_vote_id"
+                                 baseTableName="prediction"
+                                 constraintName="fk_prediction_user_poll_vote_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_poll_vote"/>
+
     </changeSet>
 </databaseChangeLog>
