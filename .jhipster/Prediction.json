@@ -2,14 +2,6 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "pollName",
-            "otherEntityName": "predictionPoll",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "predictionTitle"
-        },
-        {
             "relationshipType": "many-to-one",
             "relationshipName": "typeName",
             "otherEntityName": "predictionType",

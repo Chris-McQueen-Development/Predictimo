@@ -30,9 +30,6 @@ public class UserPollVote implements Serializable {
     @ManyToOne
     private UserProfile userProfile;
 
-    @ManyToOne
-    private PredictionPoll predictionPoll;
-
     public Long getId() {
         return id;
     }
@@ -65,19 +62,6 @@ public class UserPollVote implements Serializable {
 
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
-    }
-
-    public PredictionPoll getPredictionPoll() {
-        return predictionPoll;
-    }
-
-    public UserPollVote predictionPoll(PredictionPoll predictionPoll) {
-        this.predictionPoll = predictionPoll;
-        return this;
-    }
-
-    public void setPredictionPoll(PredictionPoll predictionPoll) {
-        this.predictionPoll = predictionPoll;
     }
 
     @Override

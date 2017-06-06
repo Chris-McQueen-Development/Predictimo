@@ -1,32 +1,22 @@
 package chris.mcqueen.development.predictimo.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.codahale.metrics.annotation.Timed;
-
 import chris.mcqueen.development.predictimo.domain.Prediction;
-import chris.mcqueen.development.predictimo.domain.PredictionPoll;
-import chris.mcqueen.development.predictimo.repository.PredictionPollRepository;
+
 import chris.mcqueen.development.predictimo.repository.PredictionRepository;
 import chris.mcqueen.development.predictimo.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing Prediction.
@@ -40,12 +30,9 @@ public class PredictionResource {
     private static final String ENTITY_NAME = "prediction";
         
     private final PredictionRepository predictionRepository;
-    
-    private final PredictionPollRepository predictionPollRepository;
 
-    public PredictionResource(PredictionRepository predictionRepository, PredictionPollRepository predictionPollRepository) {
+    public PredictionResource(PredictionRepository predictionRepository) {
         this.predictionRepository = predictionRepository;
-        this.predictionPollRepository = predictionPollRepository;
     }
 
     /**
@@ -63,15 +50,6 @@ public class PredictionResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new prediction cannot already have an ID")).body(null);
         }
         Prediction result = predictionRepository.save(prediction);
-        PredictionPoll predictionPoll = new PredictionPoll();
-        
-        predictionPoll.setPollName(result.getPredictionTitle() + " Poll");
-        predictionPoll.setPredictionTitle(result);
-        
-        predictionPollRepository.save(predictionPoll);
-        result.setPollName(predictionPoll);
-        result = predictionRepository.save(result);
-        
         return ResponseEntity.created(new URI("/api/predictions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

@@ -31,12 +31,6 @@
                 <option value=""></option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="field_predictionPoll">Prediction Poll</label>
-            <select class="form-control" id="field_predictionPoll" name="predictionPoll" ng-model="vm.userPollVote.predictionPoll" ng-options="predictionPoll as predictionPoll.id for predictionPoll in vm.predictionpolls track by predictionPoll.id">
-                <option value=""></option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

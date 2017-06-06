@@ -7,7 +7,6 @@
     <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170528141351_added_entity_Prediction.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170528141352_added_entity_PredictionType.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20170528141353_added_entity_PredictionPoll.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170528141354_added_entity_UserPollVote.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170528141355_added_entity_UserProfile.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170604155404_added_entity_PredictionResponse.xml" relativeToChangelogFile="false"/>

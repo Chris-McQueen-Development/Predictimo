@@ -5,18 +5,14 @@
         .module('predictimoApp')
         .controller('PredictionPollDialogController', PredictionPollDialogController);
 
-    PredictionPollDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'PredictionPoll', 'UserPollVote', 'Prediction'];
+    PredictionPollDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'PredictionPoll'];
 
-    function PredictionPollDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, PredictionPoll, UserPollVote, Prediction) {
+    function PredictionPollDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, PredictionPoll) {
         var vm = this;
 
         vm.predictionPoll = entity;
         vm.clear = clear;
-        vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.userpollvotes = UserPollVote.query();
-        vm.predictions = Prediction.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -45,10 +41,6 @@
             vm.isSaving = false;
         }
 
-        vm.datePickerOpenStatus.pollEndDate = false;
 
-        function openCalendar (date) {
-            vm.datePickerOpenStatus[date] = true;
-        }
     }
 })();

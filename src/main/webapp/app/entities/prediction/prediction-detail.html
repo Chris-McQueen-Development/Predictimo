@@ -20,10 +20,6 @@
         <dd>
             <span>{{vm.prediction.predictionCreatedDate | date:'mediumDate'}}</span>
         </dd>
-        <dt><span>Poll Name</span></dt>
-        <dd>
-            <a ui-sref="prediction-poll-detail({id:vm.prediction.pollName.id})">{{vm.prediction.pollName.id}}</a>
-        </dd>
         <dt><span>Type Name</span></dt>
         <dd>
             <a ui-sref="prediction-type-detail({id:vm.prediction.typeName.id})">{{vm.prediction.typeName.id}}</a>

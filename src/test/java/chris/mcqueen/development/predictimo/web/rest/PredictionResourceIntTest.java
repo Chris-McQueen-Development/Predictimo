@@ -1,20 +1,10 @@
 package chris.mcqueen.development.predictimo.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import chris.mcqueen.development.predictimo.PredictimoApp;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.List;
-
-import javax.persistence.EntityManager;
+import chris.mcqueen.development.predictimo.domain.Prediction;
+import chris.mcqueen.development.predictimo.repository.PredictionRepository;
+import chris.mcqueen.development.predictimo.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +20,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import chris.mcqueen.development.predictimo.PredictimoApp;
-import chris.mcqueen.development.predictimo.domain.Prediction;
-import chris.mcqueen.development.predictimo.repository.PredictionPollRepository;
-import chris.mcqueen.development.predictimo.repository.PredictionRepository;
-import chris.mcqueen.development.predictimo.web.rest.errors.ExceptionTranslator;
+import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Test class for the PredictionResource REST controller.
@@ -59,9 +53,6 @@ public class PredictionResourceIntTest {
 
     @Autowired
     private PredictionRepository predictionRepository;
-    
-    @Autowired
-    private PredictionPollRepository predictionPollRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -82,7 +73,7 @@ public class PredictionResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        PredictionResource predictionResource = new PredictionResource(predictionRepository, predictionPollRepository);
+        PredictionResource predictionResource = new PredictionResource(predictionRepository);
         this.restPredictionMockMvc = MockMvcBuilders.standaloneSetup(predictionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -5,9 +5,9 @@
         .module('predictimoApp')
         .controller('UserPollVoteDetailController', UserPollVoteDetailController);
 
-    UserPollVoteDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'UserPollVote', 'UserProfile', 'PredictionPoll'];
+    UserPollVoteDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'UserPollVote', 'UserProfile'];
 
-    function UserPollVoteDetailController($scope, $rootScope, $stateParams, previousState, entity, UserPollVote, UserProfile, PredictionPoll) {
+    function UserPollVoteDetailController($scope, $rootScope, $stateParams, previousState, entity, UserPollVote, UserProfile) {
         var vm = this;
 
         vm.userPollVote = entity;

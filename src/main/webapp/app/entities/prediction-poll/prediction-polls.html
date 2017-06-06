@@ -19,18 +19,12 @@
             <thead>
                 <tr>
                     <th><span>ID</span></th>
-                    <th><span>Poll Name</span></th>
-                    <th><span>Poll End Date</span></th>
-                    <th><span>Poll Correct</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="predictionPoll in vm.predictionPolls track by predictionPoll.id">
                     <td><a ui-sref="prediction-poll-detail({id:predictionPoll.id})">{{predictionPoll.id}}</a></td>
-                    <td>{{predictionPoll.pollName}}</td>
-                        <td>{{predictionPoll.pollEndDate | date:'mediumDate'}}</td>
-                    <td>{{predictionPoll.pollCorrect}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

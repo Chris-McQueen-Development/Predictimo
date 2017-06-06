@@ -8,12 +8,6 @@
     -->
     <changeSet id="20170528141351-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="poll_name_id"
-                                 baseTableName="prediction"
-                                 constraintName="fk_prediction_poll_name_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="prediction_poll"/>
-
         <addForeignKeyConstraint baseColumnNames="type_name_id"
                                  baseTableName="prediction"
                                  constraintName="fk_prediction_type_name_id"

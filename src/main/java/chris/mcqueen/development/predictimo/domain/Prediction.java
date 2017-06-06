@@ -39,10 +39,6 @@ public class Prediction implements Serializable {
     @Column(name = "prediction_created_date", nullable = false)
     private LocalDate predictionCreatedDate;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private PredictionPoll pollName;
-
     @ManyToOne
     private PredictionType typeName;
 
@@ -107,19 +103,6 @@ public class Prediction implements Serializable {
 
     public void setPredictionCreatedDate(LocalDate predictionCreatedDate) {
         this.predictionCreatedDate = predictionCreatedDate;
-    }
-
-    public PredictionPoll getPollName() {
-        return pollName;
-    }
-
-    public Prediction pollName(PredictionPoll predictionPoll) {
-        this.pollName = predictionPoll;
-        return this;
-    }
-
-    public void setPollName(PredictionPoll predictionPoll) {
-        this.pollName = predictionPoll;
     }
 
     public PredictionType getTypeName() {

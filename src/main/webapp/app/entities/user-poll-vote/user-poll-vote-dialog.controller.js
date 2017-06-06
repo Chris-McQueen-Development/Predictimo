@@ -5,16 +5,15 @@
         .module('predictimoApp')
         .controller('UserPollVoteDialogController', UserPollVoteDialogController);
 
-    UserPollVoteDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserPollVote', 'UserProfile', 'PredictionPoll'];
+    UserPollVoteDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserPollVote', 'UserProfile'];
 
-    function UserPollVoteDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, UserPollVote, UserProfile, PredictionPoll) {
+    function UserPollVoteDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, UserPollVote, UserProfile) {
         var vm = this;
 
         vm.userPollVote = entity;
         vm.clear = clear;
         vm.save = save;
         vm.userprofiles = UserProfile.query();
-        vm.predictionpolls = PredictionPoll.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

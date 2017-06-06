@@ -6,12 +6,6 @@
             "relationshipName": "userProfile",
             "otherEntityName": "userProfile",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "predictionPoll",
-            "otherEntityName": "predictionPoll",
-            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -24,8 +18,8 @@
         }
     ],
     "changelogDate": "20170528141354",
-    "entityTableName": "user_poll_vote",
     "dto": "no",
-    "pagination": "no",
-    "service": "no"
+    "service": "no",
+    "entityTableName": "user_poll_vote",
+    "pagination": "no"
 }
