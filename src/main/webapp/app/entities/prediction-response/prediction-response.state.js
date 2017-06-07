@@ -95,8 +95,8 @@
                     resolve: {
                         entity: function () {
                             return {
-                                accepted: false,
                                 responseDate: null,
+                                answer: null,
                                 id: null
                             };
                         }

@@ -41,11 +41,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PredictimoApp.class)
 public class PredictionResponseResourceIntTest {
 
-    private static final Boolean DEFAULT_ACCEPTED = false;
-    private static final Boolean UPDATED_ACCEPTED = true;
-
     private static final LocalDate DEFAULT_RESPONSE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_RESPONSE_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final String DEFAULT_ANSWER = "AAAAAAAAAA";
+    private static final String UPDATED_ANSWER = "BBBBBBBBBB";
 
     @Autowired
     private PredictionResponseRepository predictionResponseRepository;
@@ -84,8 +84,8 @@ public class PredictionResponseResourceIntTest {
      */
     public static PredictionResponse createEntity(EntityManager em) {
         PredictionResponse predictionResponse = new PredictionResponse()
-            .accepted(DEFAULT_ACCEPTED)
-            .responseDate(DEFAULT_RESPONSE_DATE);
+            .responseDate(DEFAULT_RESPONSE_DATE)
+            .answer(DEFAULT_ANSWER);
         // Add required entity
         UserProfile userProfile = UserProfileResourceIntTest.createEntity(em);
         em.persist(userProfile);
@@ -119,8 +119,8 @@ public class PredictionResponseResourceIntTest {
         List<PredictionResponse> predictionResponseList = predictionResponseRepository.findAll();
         assertThat(predictionResponseList).hasSize(databaseSizeBeforeCreate + 1);
         PredictionResponse testPredictionResponse = predictionResponseList.get(predictionResponseList.size() - 1);
-        assertThat(testPredictionResponse.isAccepted()).isEqualTo(DEFAULT_ACCEPTED);
         assertThat(testPredictionResponse.getResponseDate()).isEqualTo(DEFAULT_RESPONSE_DATE);
+        assertThat(testPredictionResponse.getAnswer()).isEqualTo(DEFAULT_ANSWER);
     }
 
     @Test
@@ -144,24 +144,6 @@ public class PredictionResponseResourceIntTest {
 
     @Test
     @Transactional
-    public void checkAcceptedIsRequired() throws Exception {
-        int databaseSizeBeforeTest = predictionResponseRepository.findAll().size();
-        // set the field null
-        predictionResponse.setAccepted(null);
-
-        // Create the PredictionResponse, which fails.
-
-        restPredictionResponseMockMvc.perform(post("/api/prediction-responses")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(predictionResponse)))
-            .andExpect(status().isBadRequest());
-
-        List<PredictionResponse> predictionResponseList = predictionResponseRepository.findAll();
-        assertThat(predictionResponseList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllPredictionResponses() throws Exception {
         // Initialize the database
         predictionResponseRepository.saveAndFlush(predictionResponse);
@@ -171,8 +153,8 @@ public class PredictionResponseResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(predictionResponse.getId().intValue())))
-            .andExpect(jsonPath("$.[*].accepted").value(hasItem(DEFAULT_ACCEPTED.booleanValue())))
-            .andExpect(jsonPath("$.[*].responseDate").value(hasItem(DEFAULT_RESPONSE_DATE.toString())));
+            .andExpect(jsonPath("$.[*].responseDate").value(hasItem(DEFAULT_RESPONSE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].answer").value(hasItem(DEFAULT_ANSWER.toString())));
     }
 
     @Test
@@ -186,8 +168,8 @@ public class PredictionResponseResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(predictionResponse.getId().intValue()))
-            .andExpect(jsonPath("$.accepted").value(DEFAULT_ACCEPTED.booleanValue()))
-            .andExpect(jsonPath("$.responseDate").value(DEFAULT_RESPONSE_DATE.toString()));
+            .andExpect(jsonPath("$.responseDate").value(DEFAULT_RESPONSE_DATE.toString()))
+            .andExpect(jsonPath("$.answer").value(DEFAULT_ANSWER.toString()));
     }
 
     @Test
@@ -208,8 +190,8 @@ public class PredictionResponseResourceIntTest {
         // Update the predictionResponse
         PredictionResponse updatedPredictionResponse = predictionResponseRepository.findOne(predictionResponse.getId());
         updatedPredictionResponse
-            .accepted(UPDATED_ACCEPTED)
-            .responseDate(UPDATED_RESPONSE_DATE);
+            .responseDate(UPDATED_RESPONSE_DATE)
+            .answer(UPDATED_ANSWER);
 
         restPredictionResponseMockMvc.perform(put("/api/prediction-responses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -220,8 +202,8 @@ public class PredictionResponseResourceIntTest {
         List<PredictionResponse> predictionResponseList = predictionResponseRepository.findAll();
         assertThat(predictionResponseList).hasSize(databaseSizeBeforeUpdate);
         PredictionResponse testPredictionResponse = predictionResponseList.get(predictionResponseList.size() - 1);
-        assertThat(testPredictionResponse.isAccepted()).isEqualTo(UPDATED_ACCEPTED);
         assertThat(testPredictionResponse.getResponseDate()).isEqualTo(UPDATED_RESPONSE_DATE);
+        assertThat(testPredictionResponse.getAnswer()).isEqualTo(UPDATED_ANSWER);
     }
 
     @Test

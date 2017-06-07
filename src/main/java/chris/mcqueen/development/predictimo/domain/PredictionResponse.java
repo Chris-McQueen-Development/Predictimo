@@ -24,12 +24,11 @@ public class PredictionResponse implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "accepted", nullable = false)
-    private Boolean accepted;
-
     @Column(name = "response_date")
     private LocalDate responseDate;
+
+    @Column(name = "answer")
+    private String answer;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -47,19 +46,6 @@ public class PredictionResponse implements Serializable {
         this.id = id;
     }
 
-    public Boolean isAccepted() {
-        return accepted;
-    }
-
-    public PredictionResponse accepted(Boolean accepted) {
-        this.accepted = accepted;
-        return this;
-    }
-
-    public void setAccepted(Boolean accepted) {
-        this.accepted = accepted;
-    }
-
     public LocalDate getResponseDate() {
         return responseDate;
     }
@@ -71,6 +57,19 @@ public class PredictionResponse implements Serializable {
 
     public void setResponseDate(LocalDate responseDate) {
         this.responseDate = responseDate;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public PredictionResponse answer(String answer) {
+        this.answer = answer;
+        return this;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public UserProfile getUserProfile() {
@@ -123,8 +122,8 @@ public class PredictionResponse implements Serializable {
     public String toString() {
         return "PredictionResponse{" +
             "id=" + getId() +
-            ", accepted='" + isAccepted() + "'" +
             ", responseDate='" + getResponseDate() + "'" +
+            ", answer='" + getAnswer() + "'" +
             "}";
     }
 }
