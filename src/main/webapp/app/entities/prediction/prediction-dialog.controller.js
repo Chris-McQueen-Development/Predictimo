@@ -5,9 +5,9 @@
         .module('predictimoApp')
         .controller('PredictionDialogController', PredictionDialogController);
 
-    PredictionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Prediction', 'PredictionPoll', 'PredictionType', 'UserProfile'];
+    PredictionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Prediction', 'PredictionType', 'UserProfile'];
 
-    function PredictionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Prediction, PredictionPoll, PredictionType, UserProfile) {
+    function PredictionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Prediction, PredictionType, UserProfile) {
         var vm = this;
 
         vm.prediction = entity;
@@ -18,15 +18,6 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.pollnames = PredictionPoll.query({filter: 'predictiontitle-is-null'});
-        $q.all([vm.prediction.$promise, vm.pollnames.$promise]).then(function() {
-            if (!vm.prediction.pollName || !vm.prediction.pollName.id) {
-                return $q.reject();
-            }
-            return PredictionPoll.get({id : vm.prediction.pollName.id}).$promise;
-        }).then(function(pollName) {
-            vm.pollnames.push(pollName);
-        });
         vm.predictiontypes = PredictionType.query();
         vm.userprofiles = UserProfile.query();
         $q.all([vm.userprofiles.$promise]).then(function() {

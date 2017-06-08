@@ -1,20 +1,10 @@
 package chris.mcqueen.development.predictimo.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import chris.mcqueen.development.predictimo.PredictimoApp;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.List;
-
-import javax.persistence.EntityManager;
+import chris.mcqueen.development.predictimo.domain.Prediction;
+import chris.mcqueen.development.predictimo.repository.PredictionRepository;
+import chris.mcqueen.development.predictimo.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +20,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import chris.mcqueen.development.predictimo.PredictimoApp;
-import chris.mcqueen.development.predictimo.domain.Prediction;
-import chris.mcqueen.development.predictimo.repository.PredictionPollRepository;
-import chris.mcqueen.development.predictimo.repository.PredictionRepository;
-import chris.mcqueen.development.predictimo.web.rest.errors.ExceptionTranslator;
+import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Test class for the PredictionResource REST controller.
@@ -57,11 +51,14 @@ public class PredictionResourceIntTest {
     private static final LocalDate DEFAULT_PREDICTION_CREATED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_PREDICTION_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
+    private static final Boolean DEFAULT_PREDICTION_FINISHED = false;
+    private static final Boolean UPDATED_PREDICTION_FINISHED = true;
+
+    private static final Boolean DEFAULT_VOTING_OPEN = false;
+    private static final Boolean UPDATED_VOTING_OPEN = true;
+
     @Autowired
     private PredictionRepository predictionRepository;
-    
-    @Autowired
-    private PredictionPollRepository predictionPollRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -82,7 +79,7 @@ public class PredictionResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        PredictionResource predictionResource = new PredictionResource(predictionRepository, predictionPollRepository);
+        PredictionResource predictionResource = new PredictionResource(predictionRepository);
         this.restPredictionMockMvc = MockMvcBuilders.standaloneSetup(predictionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -100,7 +97,9 @@ public class PredictionResourceIntTest {
             .predictionTitle(DEFAULT_PREDICTION_TITLE)
             .predictionDescription(DEFAULT_PREDICTION_DESCRIPTION)
             .predictionWorth(DEFAULT_PREDICTION_WORTH)
-            .predictionCreatedDate(DEFAULT_PREDICTION_CREATED_DATE);
+            .predictionCreatedDate(DEFAULT_PREDICTION_CREATED_DATE)
+            .predictionFinished(DEFAULT_PREDICTION_FINISHED)
+            .votingOpen(DEFAULT_VOTING_OPEN);
         return prediction;
     }
 
@@ -128,6 +127,8 @@ public class PredictionResourceIntTest {
         assertThat(testPrediction.getPredictionDescription()).isEqualTo(DEFAULT_PREDICTION_DESCRIPTION);
         assertThat(testPrediction.getPredictionWorth()).isEqualTo(DEFAULT_PREDICTION_WORTH);
         assertThat(testPrediction.getPredictionCreatedDate()).isEqualTo(DEFAULT_PREDICTION_CREATED_DATE);
+        assertThat(testPrediction.isPredictionFinished()).isEqualTo(DEFAULT_PREDICTION_FINISHED);
+        assertThat(testPrediction.isVotingOpen()).isEqualTo(DEFAULT_VOTING_OPEN);
     }
 
     @Test
@@ -217,7 +218,9 @@ public class PredictionResourceIntTest {
             .andExpect(jsonPath("$.[*].predictionTitle").value(hasItem(DEFAULT_PREDICTION_TITLE.toString())))
             .andExpect(jsonPath("$.[*].predictionDescription").value(hasItem(DEFAULT_PREDICTION_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].predictionWorth").value(hasItem(DEFAULT_PREDICTION_WORTH)))
-            .andExpect(jsonPath("$.[*].predictionCreatedDate").value(hasItem(DEFAULT_PREDICTION_CREATED_DATE.toString())));
+            .andExpect(jsonPath("$.[*].predictionCreatedDate").value(hasItem(DEFAULT_PREDICTION_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].predictionFinished").value(hasItem(DEFAULT_PREDICTION_FINISHED.booleanValue())))
+            .andExpect(jsonPath("$.[*].votingOpen").value(hasItem(DEFAULT_VOTING_OPEN.booleanValue())));
     }
 
     @Test
@@ -234,7 +237,9 @@ public class PredictionResourceIntTest {
             .andExpect(jsonPath("$.predictionTitle").value(DEFAULT_PREDICTION_TITLE.toString()))
             .andExpect(jsonPath("$.predictionDescription").value(DEFAULT_PREDICTION_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.predictionWorth").value(DEFAULT_PREDICTION_WORTH))
-            .andExpect(jsonPath("$.predictionCreatedDate").value(DEFAULT_PREDICTION_CREATED_DATE.toString()));
+            .andExpect(jsonPath("$.predictionCreatedDate").value(DEFAULT_PREDICTION_CREATED_DATE.toString()))
+            .andExpect(jsonPath("$.predictionFinished").value(DEFAULT_PREDICTION_FINISHED.booleanValue()))
+            .andExpect(jsonPath("$.votingOpen").value(DEFAULT_VOTING_OPEN.booleanValue()));
     }
 
     @Test
@@ -258,7 +263,9 @@ public class PredictionResourceIntTest {
             .predictionTitle(UPDATED_PREDICTION_TITLE)
             .predictionDescription(UPDATED_PREDICTION_DESCRIPTION)
             .predictionWorth(UPDATED_PREDICTION_WORTH)
-            .predictionCreatedDate(UPDATED_PREDICTION_CREATED_DATE);
+            .predictionCreatedDate(UPDATED_PREDICTION_CREATED_DATE)
+            .predictionFinished(UPDATED_PREDICTION_FINISHED)
+            .votingOpen(UPDATED_VOTING_OPEN);
 
         restPredictionMockMvc.perform(put("/api/predictions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -273,6 +280,8 @@ public class PredictionResourceIntTest {
         assertThat(testPrediction.getPredictionDescription()).isEqualTo(UPDATED_PREDICTION_DESCRIPTION);
         assertThat(testPrediction.getPredictionWorth()).isEqualTo(UPDATED_PREDICTION_WORTH);
         assertThat(testPrediction.getPredictionCreatedDate()).isEqualTo(UPDATED_PREDICTION_CREATED_DATE);
+        assertThat(testPrediction.isPredictionFinished()).isEqualTo(UPDATED_PREDICTION_FINISHED);
+        assertThat(testPrediction.isVotingOpen()).isEqualTo(UPDATED_VOTING_OPEN);
     }
 
     @Test

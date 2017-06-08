@@ -8,9 +8,12 @@
             "otherEntityField": "id"
         },
         {
+            "relationshipName": "predictionResponse",
+            "otherEntityName": "predictionResponse",
             "relationshipType": "many-to-one",
-            "relationshipName": "predictionPoll",
-            "otherEntityName": "predictionPoll",
+            "relationshipValidateRules": [
+                "required"
+            ],
             "otherEntityField": "id"
         }
     ],
@@ -24,8 +27,8 @@
         }
     ],
     "changelogDate": "20170528141354",
-    "entityTableName": "user_poll_vote",
     "dto": "no",
-    "pagination": "no",
-    "service": "no"
+    "service": "no",
+    "entityTableName": "user_poll_vote",
+    "pagination": "no"
 }

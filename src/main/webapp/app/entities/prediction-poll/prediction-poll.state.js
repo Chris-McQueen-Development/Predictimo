@@ -95,9 +95,6 @@
                     resolve: {
                         entity: function () {
                             return {
-                                pollName: null,
-                                pollEndDate: null,
-                                pollCorrect: null,
                                 id: null
                             };
                         }

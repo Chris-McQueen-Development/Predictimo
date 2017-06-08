@@ -32,10 +32,15 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="field_predictionPoll">Prediction Poll</label>
-            <select class="form-control" id="field_predictionPoll" name="predictionPoll" ng-model="vm.userPollVote.predictionPoll" ng-options="predictionPoll as predictionPoll.id for predictionPoll in vm.predictionpolls track by predictionPoll.id">
-                <option value=""></option>
+            <label for="field_predictionResponse">Prediction Response</label>
+            <select class="form-control" id="field_predictionResponse" name="predictionResponse" ng-model="vm.userPollVote.predictionResponse" ng-options="predictionResponse as predictionResponse.id for predictionResponse in vm.predictionresponses track by predictionResponse.id" required>
             </select>
+        </div>
+        <div ng-show="editForm.predictionResponse.$invalid">
+            <p class="help-block"
+                ng-show="editForm.predictionResponse.$error.required">
+                This field is required.
+            </p>
         </div>
     </div>
     <div class="modal-footer">

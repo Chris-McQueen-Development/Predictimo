@@ -22,15 +22,12 @@
     ],
     "fields": [
         {
-            "fieldName": "accepted",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "responseDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "answer",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170604155404",

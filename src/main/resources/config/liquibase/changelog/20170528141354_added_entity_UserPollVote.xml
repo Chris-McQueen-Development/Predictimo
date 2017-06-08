@@ -29,8 +29,8 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="prediction_poll_id" type="bigint">
-                <constraints nullable="true" />
+            <column name="prediction_response_id" type="bigint">
+                <constraints nullable="false" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

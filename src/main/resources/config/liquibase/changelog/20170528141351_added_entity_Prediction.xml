@@ -36,9 +36,15 @@
             <column name="prediction_created_date" type="date">
                 <constraints nullable="false" />
             </column>
-            <column name="poll_name_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+
+            <column name="prediction_finished" type="boolean">
+                <constraints nullable="true" />
             </column>
+
+            <column name="voting_open" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
             <column name="type_name_id" type="bigint">
                 <constraints nullable="true" />
             </column>

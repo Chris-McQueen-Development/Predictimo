@@ -21,7 +21,7 @@
                     <th><span>ID</span></th>
                     <th><span>Is Correct Vote</span></th>
                     <th><span>User Profile</span></th>
-                    <th><span>Prediction Poll</span></th>
+                    <th><span>Prediction Response</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -33,7 +33,7 @@
                         <a ui-sref="user-profile-detail({id:userPollVote.userProfile.id})">{{userPollVote.userProfile.id}}</a>
                     </td>
                     <td>
-                        <a ui-sref="prediction-poll-detail({id:userPollVote.predictionPoll.id})">{{userPollVote.predictionPoll.id}}</a>
+                        <a ui-sref="prediction-response-detail({id:userPollVote.predictionResponse.id})">{{userPollVote.predictionResponse.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

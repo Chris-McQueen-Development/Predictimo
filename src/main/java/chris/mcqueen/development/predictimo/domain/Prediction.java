@@ -39,9 +39,11 @@ public class Prediction implements Serializable {
     @Column(name = "prediction_created_date", nullable = false)
     private LocalDate predictionCreatedDate;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private PredictionPoll pollName;
+    @Column(name = "prediction_finished")
+    private Boolean predictionFinished;
+
+    @Column(name = "voting_open")
+    private Boolean votingOpen;
 
     @ManyToOne
     private PredictionType typeName;
@@ -109,17 +111,30 @@ public class Prediction implements Serializable {
         this.predictionCreatedDate = predictionCreatedDate;
     }
 
-    public PredictionPoll getPollName() {
-        return pollName;
+    public Boolean isPredictionFinished() {
+        return predictionFinished;
     }
 
-    public Prediction pollName(PredictionPoll predictionPoll) {
-        this.pollName = predictionPoll;
+    public Prediction predictionFinished(Boolean predictionFinished) {
+        this.predictionFinished = predictionFinished;
         return this;
     }
 
-    public void setPollName(PredictionPoll predictionPoll) {
-        this.pollName = predictionPoll;
+    public void setPredictionFinished(Boolean predictionFinished) {
+        this.predictionFinished = predictionFinished;
+    }
+
+    public Boolean isVotingOpen() {
+        return votingOpen;
+    }
+
+    public Prediction votingOpen(Boolean votingOpen) {
+        this.votingOpen = votingOpen;
+        return this;
+    }
+
+    public void setVotingOpen(Boolean votingOpen) {
+        this.votingOpen = votingOpen;
     }
 
     public PredictionType getTypeName() {
@@ -176,6 +191,8 @@ public class Prediction implements Serializable {
             ", predictionDescription='" + getPredictionDescription() + "'" +
             ", predictionWorth='" + getPredictionWorth() + "'" +
             ", predictionCreatedDate='" + getPredictionCreatedDate() + "'" +
+            ", predictionFinished='" + isPredictionFinished() + "'" +
+            ", votingOpen='" + isVotingOpen() + "'" +
             "}";
     }
 }

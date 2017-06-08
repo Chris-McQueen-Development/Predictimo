@@ -99,6 +99,8 @@
                                 predictionDescription: null,
                                 predictionWorth: null,
                                 predictionCreatedDate: null,
+                                predictionFinished: null,
+                                votingOpen: null,
                                 id: null
                             };
                         }

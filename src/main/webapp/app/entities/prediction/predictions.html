@@ -23,7 +23,8 @@
                     <th><span>Prediction Description</span></th>
                     <th><span>Prediction Worth</span></th>
                     <th><span>Prediction Created Date</span></th>
-                    <th><span>Poll Name</span></th>
+                    <th><span>Prediction Finished</span></th>
+                    <th><span>Voting Open</span></th>
                     <th><span>Type Name</span></th>
                     <th><span>Creator</span></th>
                     <th></th>
@@ -36,9 +37,8 @@
                     <td>{{prediction.predictionDescription}}</td>
                     <td>{{prediction.predictionWorth}}</td>
                         <td>{{prediction.predictionCreatedDate | date:'mediumDate'}}</td>
-                    <td>
-                        <a ui-sref="prediction-poll-detail({id:prediction.pollName.id})">{{prediction.pollName.id}}</a>
-                    </td>
+                    <td>{{prediction.predictionFinished}}</td>
+                    <td>{{prediction.votingOpen}}</td>
                     <td>
                         <a ui-sref="prediction-type-detail({id:prediction.typeName.id})">{{prediction.typeName.id}}</a>
                     </td>

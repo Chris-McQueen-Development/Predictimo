@@ -46,8 +46,6 @@ public class CacheConfiguration {
             cm.createCache(chris.mcqueen.development.predictimo.domain.Prediction.class.getName() + ".userProfileCreators", jcacheConfiguration);
             cm.createCache(chris.mcqueen.development.predictimo.domain.PredictionType.class.getName(), jcacheConfiguration);
             cm.createCache(chris.mcqueen.development.predictimo.domain.PredictionType.class.getName() + ".predictionTitles", jcacheConfiguration);
-            cm.createCache(chris.mcqueen.development.predictimo.domain.PredictionPoll.class.getName(), jcacheConfiguration);
-            cm.createCache(chris.mcqueen.development.predictimo.domain.PredictionPoll.class.getName() + ".userVotes", jcacheConfiguration);
             cm.createCache(chris.mcqueen.development.predictimo.domain.UserPollVote.class.getName(), jcacheConfiguration);
             cm.createCache(chris.mcqueen.development.predictimo.domain.UserProfile.class.getName(), jcacheConfiguration);
             cm.createCache(chris.mcqueen.development.predictimo.domain.UserProfile.class.getName() + ".userVotes", jcacheConfiguration);

@@ -19,8 +19,8 @@
             <thead>
                 <tr>
                     <th><span>ID</span></th>
-                    <th><span>Accepted</span></th>
                     <th><span>Response Date</span></th>
+                    <th><span>Answer</span></th>
                     <th><span>User Profile</span></th>
                     <th><span>Prediction</span></th>
                     <th></th>
@@ -29,8 +29,8 @@
             <tbody>
                 <tr ng-repeat="predictionResponse in vm.predictionResponses track by predictionResponse.id">
                     <td><a ui-sref="prediction-response-detail({id:predictionResponse.id})">{{predictionResponse.id}}</a></td>
-                    <td>{{predictionResponse.accepted}}</td>
                         <td>{{predictionResponse.responseDate | date:'mediumDate'}}</td>
+                    <td>{{predictionResponse.answer}}</td>
                     <td>
                         <a ui-sref="user-profile-detail({id:predictionResponse.userProfile.id})">{{predictionResponse.userProfile.alias}}</a>
                     </td>
