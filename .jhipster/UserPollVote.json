@@ -6,6 +6,15 @@
             "relationshipName": "userProfile",
             "otherEntityName": "userProfile",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "predictionResponse",
+            "otherEntityName": "predictionResponse",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
         }
     ],
     "fields": [

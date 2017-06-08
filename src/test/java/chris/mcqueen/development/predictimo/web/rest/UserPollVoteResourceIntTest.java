@@ -3,6 +3,7 @@ package chris.mcqueen.development.predictimo.web.rest;
 import chris.mcqueen.development.predictimo.PredictimoApp;
 
 import chris.mcqueen.development.predictimo.domain.UserPollVote;
+import chris.mcqueen.development.predictimo.domain.PredictionResponse;
 import chris.mcqueen.development.predictimo.repository.UserPollVoteRepository;
 import chris.mcqueen.development.predictimo.web.rest.errors.ExceptionTranslator;
 
@@ -78,6 +79,11 @@ public class UserPollVoteResourceIntTest {
     public static UserPollVote createEntity(EntityManager em) {
         UserPollVote userPollVote = new UserPollVote()
             .isCorrectVote(DEFAULT_IS_CORRECT_VOTE);
+        // Add required entity
+        PredictionResponse predictionResponse = PredictionResponseResourceIntTest.createEntity(em);
+        em.persist(predictionResponse);
+        em.flush();
+        userPollVote.setPredictionResponse(predictionResponse);
         return userPollVote;
     }
 
