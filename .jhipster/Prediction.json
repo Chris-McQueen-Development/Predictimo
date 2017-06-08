@@ -12,14 +12,6 @@
             "otherEntityName": "userProfile",
             "relationshipType": "many-to-one",
             "otherEntityField": "alias"
-        },
-        {
-            "relationshipName": "userPollVote",
-            "otherEntityName": "userPollVote",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "prediction"
         }
     ],
     "fields": [

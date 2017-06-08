@@ -27,7 +27,6 @@
                     <th><span>Voting Open</span></th>
                     <th><span>Type Name</span></th>
                     <th><span>Creator</span></th>
-                    <th><span>User Poll Vote</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -45,9 +44,6 @@
                     </td>
                     <td>
                         <a ui-sref="user-profile-detail({id:prediction.creator.id})">{{prediction.creator.alias}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="user-poll-vote-detail({id:prediction.userPollVote.id})">{{prediction.userPollVote.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

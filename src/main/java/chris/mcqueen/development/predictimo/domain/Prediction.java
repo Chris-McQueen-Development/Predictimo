@@ -51,10 +51,6 @@ public class Prediction implements Serializable {
     @ManyToOne
     private UserProfile creator;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private UserPollVote userPollVote;
-
     public Long getId() {
         return id;
     }
@@ -165,19 +161,6 @@ public class Prediction implements Serializable {
 
     public void setCreator(UserProfile userProfile) {
         this.creator = userProfile;
-    }
-
-    public UserPollVote getUserPollVote() {
-        return userPollVote;
-    }
-
-    public Prediction userPollVote(UserPollVote userPollVote) {
-        this.userPollVote = userPollVote;
-        return this;
-    }
-
-    public void setUserPollVote(UserPollVote userPollVote) {
-        this.userPollVote = userPollVote;
     }
 
     @Override
