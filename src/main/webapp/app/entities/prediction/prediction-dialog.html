@@ -14,7 +14,7 @@
                     ng-model="vm.prediction.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_predictionTitle">Prediction Title</label>
+            <label class="control-label" for="field_predictionTitle">Prediction Title</label> (What the prediction is about, not your answer)
             <input type="text" class="form-control" name="predictionTitle" id="field_predictionTitle"
                     ng-model="vm.prediction.predictionTitle"
                     required/>
@@ -29,6 +29,12 @@
             <label class="control-label" for="field_predictionDescription">Prediction Description</label>
             <input type="text" class="form-control" name="predictionDescription" id="field_predictionDescription"
                     ng-model="vm.prediction.predictionDescription"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_predictionResponseAnswer">Prediction Answer</label>
+            <input type="text" class="form-control" name="predictionResponseAnswer" id="field_predictionResponseAnswer"
+                    ng-model="vm.predictionResponse.answer"
                     />
         </div>
         <div class="form-group" >

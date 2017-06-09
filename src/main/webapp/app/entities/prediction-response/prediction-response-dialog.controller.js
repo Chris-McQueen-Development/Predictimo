@@ -17,6 +17,8 @@
         vm.save = save;
         vm.userprofiles = UserProfile.query();
         vm.predictions = Prediction.query();
+        vm.datePickerOpenStatus.responseDate = false;
+        vm.predictionResponse.responseDate = new Date();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
