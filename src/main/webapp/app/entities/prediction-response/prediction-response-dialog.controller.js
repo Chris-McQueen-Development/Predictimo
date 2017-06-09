@@ -5,9 +5,9 @@
         .module('predictimoApp')
         .controller('PredictionResponseDialogController', PredictionResponseDialogController);
 
-    PredictionResponseDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'PredictionResponse', 'UserProfile', 'Prediction'];
+    PredictionResponseDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'PredictionResponse', 'UserProfile', 'Prediction', 'User'];
 
-    function PredictionResponseDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, PredictionResponse, UserProfile, Prediction) {
+    function PredictionResponseDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, PredictionResponse, UserProfile, Prediction, User) {
         var vm = this;
 
         vm.predictionResponse = entity;
