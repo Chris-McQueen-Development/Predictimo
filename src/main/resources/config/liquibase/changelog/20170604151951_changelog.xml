@@ -183,9 +183,6 @@
     <changeSet author="chris (generated)" id="1496589599088-17">
         <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
     </changeSet>
-<!--     <changeSet author="chris (generated)" id="1496589599088-18">
-        <addUniqueConstraint columnNames="poll_name_id" constraintName="UC_PREDICTIONPOLL_NAME_ID_COL" tableName="prediction"/>
-    </changeSet> -->
     <changeSet author="chris (generated)" id="1496589599088-19">
         <addUniqueConstraint columnNames="user_id" constraintName="UC_USER_PROFILEUSER_ID_COL" tableName="user_profile"/>
     </changeSet>
