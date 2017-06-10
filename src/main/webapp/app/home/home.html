@@ -37,7 +37,7 @@
                         <a ui-sref="user-profile-detail({id:prediction.creator.id})">{{prediction.creator.alias}}</a>
                     </td>
                     <td><button type="submit"
-                                    ui-sref="prediction.edit({id:prediction.id})"
+                                    ui-sref="prediction-response.new({predictionId: prediction.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil">Respond</span>
                                 <span class="hidden-sm-down"></span>

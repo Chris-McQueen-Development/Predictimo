@@ -81,7 +81,7 @@
         })
         .state('prediction-response.new', {
             parent: 'prediction-response',
-            url: '/new',
+            url: '/new?predictionId',
             data: {
                 authorities: ['ROLE_USER']
             },
