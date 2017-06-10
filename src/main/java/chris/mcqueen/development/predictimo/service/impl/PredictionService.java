@@ -23,7 +23,7 @@ public class PredictionService implements IPredictionService {
 		
 		EntityManager em = entityManagerFactory.createEntityManager();
 		
-		String queryString = "SELECT * FROM PREDICTION P";
+		String queryString = "SELECT p FROM Prediction AS p WHERE p.predictionFinished != true";
 		Query q = em.createQuery(queryString);
 		
 		List<Prediction> predictions = q.getResultList();

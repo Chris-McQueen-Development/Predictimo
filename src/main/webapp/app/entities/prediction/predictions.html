@@ -18,29 +18,29 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr>
-                    <th><span>ID</span></th>
+                    <!--<th><span>ID</span></th>-->
                     <th><span>Prediction Title</span></th>
                     <th><span>Prediction Description</span></th>
-                    <th><span>Prediction Worth</span></th>
+                    <!--<th><span>Prediction Worth</span></th>-->
                     <th><span>Prediction Created Date</span></th>
                     <th><span>Prediction Finished</span></th>
-                    <th><span>Voting Open</span></th>
-                    <th><span>Type Name</span></th>
+                   <!-- <th><span>Voting Open</span></th>-->
+                    <th><span>Prediction Type</span></th>
                     <th><span>Creator</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="prediction in vm.predictions track by prediction.id">
-                    <td><a ui-sref="prediction-detail({id:prediction.id})">{{prediction.id}}</a></td>
+                    <!--<td><a ui-sref="prediction-detail({id:prediction.id})">{{prediction.id}}</a></td>-->
                     <td>{{prediction.predictionTitle}}</td>
                     <td>{{prediction.predictionDescription}}</td>
-                    <td>{{prediction.predictionWorth}}</td>
+                    <!--<td>{{prediction.predictionWorth}}</td>-->
                         <td>{{prediction.predictionCreatedDate | date:'mediumDate'}}</td>
                     <td>{{prediction.predictionFinished}}</td>
-                    <td>{{prediction.votingOpen}}</td>
+                    <!--<td>{{prediction.votingOpen}}</td>-->
                     <td>
-                        <a ui-sref="prediction-type-detail({id:prediction.typeName.id})">{{prediction.typeName.id}}</a>
+                        <a ui-sref="prediction-type-detail({id:prediction.typeName.id})">{{prediction.typeName.typeName}}</a>
                     </td>
                     <td>
                         <a ui-sref="user-profile-detail({id:prediction.creator.id})">{{prediction.creator.alias}}</a>
@@ -53,7 +53,7 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
-                            <button type="submit"
+                         <!--   <button type="submit"
                                     ui-sref="prediction.edit({id:prediction.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
@@ -64,7 +64,7 @@
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down"></span>
-                            </button>
+                            </button>-->
                         </div>
                     </td>
                 </tr>

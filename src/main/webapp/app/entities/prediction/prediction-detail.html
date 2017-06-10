@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Prediction</span> {{vm.prediction.id}}</h2>
+    <h2><span>Prediction By</span> {{vm.prediction.creator.alias}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
@@ -13,9 +13,9 @@
             <span>{{vm.prediction.predictionDescription}}</span>
         </dd>
         <dt><span>Prediction Worth</span></dt>
-        <dd>
+        <!--<dd>
             <span>{{vm.prediction.predictionWorth}}</span>
-        </dd>
+        </dd>-->
         <dt><span>Prediction Created Date</span></dt>
         <dd>
             <span>{{vm.prediction.predictionCreatedDate | date:'mediumDate'}}</span>
@@ -30,7 +30,7 @@
         </dd>
         <dt><span>Type Name</span></dt>
         <dd>
-            <a ui-sref="prediction-type-detail({id:vm.prediction.typeName.id})">{{vm.prediction.typeName.id}}</a>
+            <a ui-sref="prediction-type-detail({id:vm.prediction.typeName.id})">{{vm.prediction.typeName.typeName}}</a>
         </dd>
         <dt><span>Creator</span></dt>
         <dd>
@@ -44,8 +44,8 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
 
-    <button type="button" ui-sref="prediction-detail.edit({id:vm.prediction.id})" class="btn btn-primary">
+    <!--<button type="button" ui-sref="prediction-detail.edit({id:vm.prediction.id})" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down"> Edit</span>
-    </button>
+    </button>-->
 </div>
