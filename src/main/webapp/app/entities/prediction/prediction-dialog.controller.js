@@ -9,6 +9,7 @@
         // TODO: Manage default prediction worth from REST end-point //
         vm.prediction.predictionWorth = 1;
         vm.prediction.predictionFinished = false;
+        vm.isAdmin = false;
         vm.user = {};
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
@@ -18,18 +19,18 @@
         vm.userprofiles = UserProfile.query();
         vm.userFetch = Principal.identity().then(function (account) {
             vm.user = account;
+            
         });
         $q.all([vm.userprofiles.$promise, vm.userFetch.$promise]).then(function () {
             console.log(vm.user);
             for (var i = 0; i < vm.userprofiles.length; i++) {
                 if (vm.userprofiles[i].user.id === vm.user.id) {
-                    console.log("Found match!")
-                    console.log(vm.userprofiles[i]);
-                    console.log(vm.user);
                     vm.prediction.creator = vm.userprofiles[i];
-                    console.log(vm.userprofiles)
-            console.log(vm.prediction.creator);
                 }
+            }
+            for (var i = 0; i < vm.user.authorities.length; i++) {
+                if (vm.user.authorities[i] === "ROLE_ADMIN")
+                    vm.isAdmin = true;
             }
         })
         vm.predictionResponse = {};
