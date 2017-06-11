@@ -27,13 +27,13 @@
 
         <div class="form-group">
             <label for="field_userProfile">User Profile</label>
-            <select class="form-control" id="field_userProfile" name="userProfile" ng-model="vm.userPollVote.userProfile" ng-options="userProfile as userProfile.id for userProfile in vm.userprofiles track by userProfile.id">
+            <select class="form-control" id="field_userProfile" name="userProfile" ng-model="vm.userPollVote.userProfile" ng-options="userProfile as userProfile.alias for userProfile in vm.userprofiles track by userProfile.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_predictionResponse">Prediction Response</label>
-            <select class="form-control" id="field_predictionResponse" name="predictionResponse" ng-model="vm.userPollVote.predictionResponse" ng-options="predictionResponse as predictionResponse.id for predictionResponse in vm.predictionresponses track by predictionResponse.id" required>
+            <select class="form-control" id="field_predictionResponse" name="predictionResponse" ng-model="vm.userPollVote.predictionResponse" ng-options="predictionResponse as predictionResponse.prediction.predictionTitle + ' - ' + predictionResponse.answer for predictionResponse in vm.predictionresponses track by predictionResponse.id" required>
             </select>
         </div>
         <div ng-show="editForm.predictionResponse.$invalid">
