@@ -39,18 +39,18 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
-                            <!--<button type="submit"
+                            <button type="submit"
                                     ui-sref="prediction-type.edit({id:predictionType.id})"
-                                    class="btn btn-primary btn-sm">
+                                    class="btn btn-primary btn-sm" ng-show="vm.isAdmin">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="prediction-type.delete({id:predictionType.id})"
-                                    class="btn btn-danger btn-sm">
+                                    class="btn btn-danger btn-sm" ng-show="vm.isAdmin">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down"></span>
-                            </button>-->
+                            </button>
                         </div>
                     </td>
                 </tr>
